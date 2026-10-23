@@ -18,9 +18,7 @@ Der Hero ist ein Foto der Fassade, das zeigt, wie es **gerade jetzt** am Graben 
 - **Wetter live** von Open-Meteo (kostenlos, ohne Schlüssel). Bei Regen und Schnee fällt Regen bzw. Schnee über das Foto, bei Nebel liegt ein Schleier darüber. Auf dem Foto sind Hotspots für Chattanooga, die Stiege zum Stadtbräu und den Schanigarten.
 - **Schwarze Tafel darunter** mit dem Live-Stand, z. B. „Freitag, 11:34 am Graben. 11 Grad, bedeckt.“, und dem Status von Chattanooga, Schanigarten und Stadtbräu (offen, schließt bald, öffnet um …). Der Schanigarten ist bei Regen oder Schnee automatisch zu und im Winter auf „Winterpause“.
 
-Danach kommen „Das Haus“ (links Chattanooga auf Weiß, rechts Stadtbräu auf Rot mit den Banner-Streifen), die Speisekarte mit Tabs pro Lokal und die Anfahrt mit Live-Öffnungszeiten.
-
-Der **Vorschau-Regler** (gelbe Leiste oben, nur im Prototyp) simuliert Uhrzeit, Wetter, Schanigarten-Saison und Domain.
+Der **Vorführ-Regler** (nur im Prototyp, liegt auf dem Foto) steuert Uhrzeit (mit Zeitraffer), Wetter, Schanigarten-Saison und den Einstieg (Haus, chattanooga.at, stadtbraeu.at). Ausblenden lässt er sich über die gelbe Leiste. Bei Regen und Schnee wird jeweils ein eigenes Foto geladen, mit nassem Pflaster bzw. Schnee am Boden.
 
 ## Stand der Inhalte
 
