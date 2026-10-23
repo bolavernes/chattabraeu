@@ -21,7 +21,7 @@
 
 <div class="proto" role="note">
   <p>Prototyp. Fassadenfotos sind KI-Platzhalter, Innenräume und Essen sind eure alten Fotos.</p>
-  <button class="proto-open" id="proto-open" type="button" aria-expanded="false" aria-controls="lab">Vorschau-Regler</button>
+  <button class="proto-open" id="proto-open" type="button" aria-expanded="true" aria-controls="dock">Regler ausblenden</button>
 </div>
 
 <header class="head" id="head">
@@ -52,6 +52,33 @@
         <a class="pin pin-chatta pin-up" href="#etagen" data-place="chatta"><i class="lamp"></i><span>Chattanooga</span></a>
         <a class="pin pin-braeu" href="#etagen" data-place="braeu"><i class="lamp"></i><span>Wiener Stadtbräu, die Stiege hinunter</span></a>
         <a class="pin pin-garten" href="#besuch" data-place="garten"><i class="lamp"></i><span>Schanigarten</span></a>
+      </div>
+    </div>
+
+    <!-- Prototyp: Vorführ-Regler -->
+    <div class="dock" id="dock" role="group" aria-label="Vorführ-Regler für Uhrzeit und Wetter">
+      <div class="dock-row">
+        <button class="dock-play" id="dock-play" type="button" aria-pressed="false"><span class="dock-play-icon" aria-hidden="true"></span><span class="dock-play-label">Zeitraffer</span></button>
+        <div class="dock-time">
+          <label for="dock-range" class="sr">Uhrzeit</label>
+          <input type="range" id="dock-range" min="0" max="1439" step="5" value="660">
+          <div class="dock-scale" aria-hidden="true"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+        </div>
+        <output class="dock-out" id="dock-out" for="dock-range">11:00</output>
+      </div>
+      <div class="dock-row dock-row-2">
+        <div class="dock-wx" role="group" aria-label="Wetter">
+          <button type="button" data-wx="live" aria-pressed="true">Echtes Wetter</button>
+          <button type="button" data-wx="clear" aria-pressed="false">Sonne</button>
+          <button type="button" data-wx="rain" aria-pressed="false">Regen</button>
+          <button type="button" data-wx="snow" aria-pressed="false">Schnee</button>
+          <button type="button" data-wx="fog" aria-pressed="false">Nebel</button>
+        </div>
+        <div class="dock-opts">
+          <label><input type="checkbox" id="dock-season" checked> Schanigarten-Saison</label>
+          <label><input type="checkbox" id="dock-entry"> Einstieg stadtbraeu.at</label>
+          <button type="button" class="dock-live" id="dock-live">Jetzt</button>
+        </div>
       </div>
     </div>
 
@@ -181,26 +208,6 @@
   <p>Chattanooga GmbH, Graben 29a, 1010 Wien. <a href="#top">Impressum</a> <a href="#top">Datenschutz</a></p>
 </footer>
 
-<!-- Prototyp: Vorschau-Regler -->
-<aside class="lab" id="lab" hidden aria-label="Vorschau-Regler">
-  <div class="lab-row">
-    <label for="lab-time">Uhrzeit <output id="lab-time-out">live</output></label>
-    <input type="range" id="lab-time" min="0" max="1439" step="15" value="660">
-    <button type="button" class="lab-live" id="lab-time-live" aria-pressed="true">Live</button>
-  </div>
-  <div class="lab-row" role="group" aria-label="Wetter">
-    <span>Wetter</span>
-    <button type="button" data-wx="live" aria-pressed="true">Live</button>
-    <button type="button" data-wx="clear" aria-pressed="false">Klar</button>
-    <button type="button" data-wx="rain" aria-pressed="false">Regen</button>
-    <button type="button" data-wx="snow" aria-pressed="false">Schnee</button>
-    <button type="button" data-wx="fog" aria-pressed="false">Nebel</button>
-  </div>
-  <div class="lab-row">
-    <label><input type="checkbox" id="lab-season" checked> Schanigarten-Saison</label>
-    <label><input type="checkbox" id="lab-entry"> Einstieg über stadtbraeu.at</label>
-  </div>
-</aside>
 <!--BODY-END-->
 <script src="assets/js/site.js" defer></script>
 </body>

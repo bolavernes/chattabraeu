@@ -210,29 +210,61 @@
     try { navigator.clipboard.writeText(el.textContent.trim()).then(done, select); } catch { select(); }
   }));
 
-  // ---------- Vorschau-Regler (nur Prototyp) ----------
-  const lab = $('#lab'), open = $('#proto-open');
-  open.addEventListener('click', () => { lab.hidden = !lab.hidden; open.setAttribute('aria-expanded', String(!lab.hidden)); });
-  const range = $('#lab-time'), out = $('#lab-time-out'), liveBtn = $('#lab-time-live');
-  range.addEventListener('input', () => {
-    sim.minutes = +range.value; out.textContent = hm(sim.minutes); liveBtn.setAttribute('aria-pressed', 'false'); render();
+  // ---------- Vorführ-Regler (nur Prototyp) ----------
+  const dock = $('#dock'), toggle = $('#proto-open');
+  toggle.addEventListener('click', () => {
+    dock.hidden = !dock.hidden;
+    toggle.setAttribute('aria-expanded', String(!dock.hidden));
+    toggle.textContent = dock.hidden ? 'Regler einblenden' : 'Regler ausblenden';
   });
-  liveBtn.addEventListener('click', () => { sim.minutes = null; out.textContent = 'live'; liveBtn.setAttribute('aria-pressed', 'true'); render(); });
-  $$('.lab [data-wx]').forEach((b) => b.addEventListener('click', () => {
+  const range = $('#dock-range'), out = $('#dock-out'), play = $('#dock-play');
+  let timer = 0;
+  function showTime() { out.value = out.textContent = hm(sim.minutes ?? vienna().mins); }
+  function stopPlay() {
+    clearInterval(timer); timer = 0;
+    play.setAttribute('aria-pressed', 'false'); play.querySelector('.dock-play-label').textContent = 'Zeitraffer';
+  }
+  range.addEventListener('input', () => { stopPlay(); sim.minutes = +range.value; showTime(); render(); });
+  play.addEventListener('click', () => {
+    if (timer) return stopPlay();
+    let m = sim.minutes ?? vienna().mins;
+    play.setAttribute('aria-pressed', 'true'); play.querySelector('.dock-play-label').textContent = 'Pause';
+    // ein ganzer Tag in rund 30 Sekunden: alle 100 ms acht Minuten weiter
+    timer = setInterval(() => {
+      m = (m + 8) % 1440;
+      sim.minutes = m; range.value = String(m); showTime(); render();
+    }, 100);
+  });
+  $$('.dock [data-wx]').forEach((b) => b.addEventListener('click', () => {
     sim.wx = b.dataset.wx === 'live' ? null : b.dataset.wx;
-    $$('.lab [data-wx]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $$('.dock [data-wx]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     render();
   }));
-  $('#lab-season').addEventListener('change', (e) => { sim.season = e.target.checked; render(); });
-  const entryBox = $('#lab-entry');
+  $('#dock-season').addEventListener('change', (e) => { sim.season = e.target.checked; render(); });
+  const entryBox = $('#dock-entry');
   entryBox.checked = document.body.dataset.entry === 'braeu';
   entryBox.addEventListener('change', () => setEntry(entryBox.checked));
+  $('#dock-live').addEventListener('click', () => {
+    stopPlay(); sim.minutes = null; sim.wx = null;
+    $$('.dock [data-wx]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.wx === 'live')));
+    range.value = String(vienna().mins); showTime(); render();
+  });
+
+  // Tagesverlauf als Farbe auf dem Regler: Nacht, Dämmerung, Tag
+  function paintTrack() {
+    const sun = sunTimes(vienna());
+    const p = (m) => (Math.max(0, Math.min(1440, m)) / 1440 * 100).toFixed(2) + '%';
+    const N = '#101a3a', D = '#e8743b', T = '#86c3f2';
+    range.style.setProperty('--track', `linear-gradient(90deg, ${N} 0%, ${N} ${p(sun.rise - 45)}, ${D} ${p(sun.rise)}, ${T} ${p(sun.rise + 50)}, ${T} ${p(sun.set - 50)}, ${D} ${p(sun.set)}, ${N} ${p(sun.set + 45)}, ${N} 100%)`);
+  }
 
   // ---------- Start ----------
-  range.value = String(vienna().mins - (vienna().mins % 15));
+  range.value = String(vienna().mins);
+  paintTrack();
+  showTime();
   sizeCanvas();
   render();
   loadWeather();
-  setInterval(render, 60_000);
+  setInterval(() => { if (sim.minutes === null) { range.value = String(vienna().mins); showTime(); } render(); }, 60_000);
   setInterval(loadWeather, 15 * 60_000);
 })();
