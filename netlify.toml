@@ -1,0 +1,50 @@
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    X-Frame-Options = "SAMEORIGIN"
+    # Prototyp: nicht indexieren. Vor dem Livegang entfernen.
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Beide Domains zeigen auf dieselbe Site. Welche Etage zuerst aufgeht,
+# entscheidet assets/js/site.js anhand des Hostnamens (stadtbraeu.at -> Keller).
+# Die alten WordPress-Pfade leiten wir um, sobald die Domains umziehen:
+[[redirects]]
+  from = "/speisekarte/*"
+  to = "/#stadtbraeu"
+  status = 301
+[[redirects]]
+  from = "/ueber-uns/*"
+  to = "/#stadtbraeu"
+  status = 301
+[[redirects]]
+  from = "/galerie/*"
+  to = "/#raeume"
+  status = 301
+[[redirects]]
+  from = "/impressum/*"
+  to = "/#top"
+  status = 302
+[[redirects]]
+  from = "/dsgvo/*"
+  to = "/#top"
+  status = 302
+[[redirects]]
+  from = "/en/*"
+  to = "/"
+  status = 302
+[[redirects]]
+  from = "/wp-content/*"
+  to = "/"
+  status = 302

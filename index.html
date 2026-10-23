@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="de">
+<head>
+<!--HEAD-START-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chattanooga &amp; Wiener Stadtbräu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Ein Haus am Graben, zwei Etagen: oben das Chattanooga mit Schanigarten, unten das Wiener Stadtbräu im Gewölbekeller. Graben 29a, 1010 Wien.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Kalam:wght@400;700&display=swap">
+<!--HEAD-END-->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<!--BODY-START-->
+<div class="proto-bar" role="note">
+  <span><b>Prototyp</b> · Illustration und Raumbilder sind KI-Platzhalter</span>
+  <span class="proto-links">Einstieg testen:
+    <a href="#oben" data-entry="eg">chattanooga.at</a>
+    <a href="#unten" data-entry="ug">stadtbraeu.at</a>
+  </span>
+</div>
+
+<header class="site-head">
+  <a class="brand" href="#top" aria-label="Zum Seitenanfang">
+    <span class="brand-a" data-brand="eg">Chattanooga</span>
+    <span class="brand-amp">&amp;</span>
+    <span class="brand-b" data-brand="ug">Wiener Stadtbräu</span>
+  </a>
+  <nav class="head-nav" aria-label="Hauptnavigation">
+    <a href="#raeume">Räume</a>
+    <a href="#chattanooga">Oben</a>
+    <a href="#stadtbraeu">Unten</a>
+    <a href="#besuch">Besuch</a>
+  </nav>
+  <a class="btn btn-head" href="#besuch">Reservieren</a>
+</header>
+
+<main id="top">
+  <!-- HERO: das Haus im Schnitt -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-text">
+      <p class="eyebrow">Graben 29a · 1010 Wien · seit 1960</p>
+      <h1 id="hero-title">Ein Haus am Graben.<br>Zwei Etagen.</h1>
+      <p class="lede">Oben das <b>Chattanooga</b>, Café &amp; Grill mit Schanigarten. Unten das <b>Wiener Stadtbräu</b>, Bierkeller unterm Gewölbe. Tippen Sie auf eine Etage.</p>
+    </div>
+
+    <div class="plate" id="plate" data-floor="" data-mood="tag">
+      <div class="scroller" id="scroller"><div class="stage">
+      <img src="assets/img/haus_aquarell.webp" width="2400" height="1357" alt="Aquarell-Schnitt durch das Haus Graben 29a: oben Café mit Schanigarten und Sonnenschirmen, unten der Gewölbekeller mit Laternen, Fresken und Schank">
+      <div class="layer night" aria-hidden="true"></div>
+      <div class="layer dim dim-eg" aria-hidden="true"></div>
+      <div class="layer dim dim-ug" aria-hidden="true"></div>
+
+      <div class="glows glows-eg" aria-hidden="true">
+        <i style="left:31.9%;top:43%"></i><i style="left:39.6%;top:44%"></i><i style="left:52.9%;top:43.2%"></i>
+        <i style="left:56.8%;top:42.7%"></i><i style="left:65.7%;top:42.7%"></i>
+        <i class="sm" style="left:32.9%;top:24.6%"></i><i class="sm" style="left:38.6%;top:24.6%"></i><i class="sm" style="left:47.9%;top:24.6%"></i><i class="sm" style="left:57.1%;top:24.6%"></i><i class="sm" style="left:65.4%;top:24.6%"></i>
+      </div>
+      <div class="glows glows-ug" aria-hidden="true">
+        <i style="left:27.9%;top:73%"></i><i style="left:45.9%;top:72.4%"></i><i style="left:51.9%;top:76.6%"></i><i style="left:63.1%;top:72.9%"></i>
+        <i class="sm" style="left:31.3%;top:81.5%"></i><i class="sm" style="left:58.6%;top:80.3%"></i>
+      </div>
+
+      <button class="zone zone-eg" data-floor="eg" aria-label="Erdgeschoß: Chattanooga"></button>
+      <button class="zone zone-ug" data-floor="ug" aria-label="Keller: Wiener Stadtbräu"></button>
+
+      <span class="tag tag-eg" aria-hidden="true">Erdgeschoß · Chattanooga</span>
+      <span class="tag tag-ug" aria-hidden="true">Keller · Wiener Stadtbräu</span>
+
+      <button class="tap" id="tap" aria-label="Bier zapfen"><span class="tap-ring"></span></button>
+      <div class="pour" id="pour" role="status" hidden>
+        <svg viewBox="0 0 60 80" width="60" height="80" aria-hidden="true">
+          <defs><clipPath id="mug"><path d="M8 10h34v58a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z"/></clipPath></defs>
+          <g clip-path="url(#mug)"><rect class="beer" x="0" y="80" width="60" height="80"/><rect class="foam" x="0" y="80" width="60" height="12"/></g>
+          <path d="M8 10h34v58a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <path d="M42 22h6a6 6 0 0 1 6 6v18a6 6 0 0 1-6 6h-6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+        <p>Prost! Frisch gezapft ab 16 Uhr, unten im Keller.</p>
+      </div>
+      </div></div>
+      <p class="swipe-hint" aria-hidden="true">&larr; seitlich wischen &rarr;</p>
+
+      <div class="mood-toggle" role="group" aria-label="Tageszeit der Illustration">
+        <button data-mood="tag" aria-pressed="true">Tag</button>
+        <button data-mood="abend" aria-pressed="false">Abend</button>
+      </div>
+    </div>
+
+    <div class="floors">
+      <article class="floor-card fc-eg" data-floor="eg">
+        <p class="fc-level">EG <span>· Erdgeschoß &amp; Schanigarten</span></p>
+        <h2>Chattanooga</h2>
+        <p class="fc-sub">Café &amp; Grill. Frühstück ab 8 Uhr, Wiener und internationale Küche, durchgehend.</p>
+        <p class="status" data-status="eg">Täglich 8–24 Uhr</p>
+        <div class="fc-actions">
+          <a class="btn btn-red" href="#chattanooga">Zur Karte</a>
+          <a class="btn btn-ghost" href="#besuch">Reservieren</a>
+        </div>
+      </article>
+      <article class="floor-card fc-ug" data-floor="ug">
+        <p class="fc-level">UG <span>· Gewölbekeller</span></p>
+        <h2>Wiener Stadtbräu</h2>
+        <p class="fc-sub">Gasthaus mit Bierfokus. Bier vom Fass, Wirtshausküche, Tanz und Jazz unterm Gewölbe.</p>
+        <p class="status" data-status="ug">Täglich ab 16 Uhr</p>
+        <div class="fc-actions">
+          <a class="btn btn-amber" href="#stadtbraeu">Zur Bierkarte</a>
+          <a class="btn btn-ghost" href="#besuch">Reservieren</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- RÄUME: Kartenstapel -->
+  <section class="rooms" id="raeume" aria-labelledby="rooms-title">
+    <div class="rooms-head">
+      <p class="eyebrow">Durchs Haus</p>
+      <h2 id="rooms-title">Fünf Plätze unter einer Adresse</h2>
+      <p class="rooms-hint">Wischen oder mit den Pfeilen blättern</p>
+    </div>
+    <div class="deck" id="deck" tabindex="0" aria-roledescription="Karussell" aria-label="Räume im Haus">
+      <article class="card" data-i="0">
+        <img src="assets/img/raum_schanigarten.webp" width="896" height="1120" alt="Aquarell: Schanigarten mit weißen Schirmen am Graben" loading="lazy">
+        <div class="card-body"><span class="lvl lvl-eg">EG</span><h3>Schanigarten</h3><p>Knapp 200 Plätze am Graben, mit Blick auf die Pestsäule.</p><a href="#chattanooga">Zum Chattanooga</a></div>
+      </article>
+      <article class="card" data-i="1">
+        <img src="assets/img/raum_cafe.webp" width="896" height="1120" alt="Aquarell: Café-Innenraum mit Schnitzel und Spareribs" loading="lazy">
+        <div class="card-body"><span class="lvl lvl-eg">EG</span><h3>Café &amp; Grill</h3><p>70 Plätze, klimatisiert. Spareribs vom Lavasteingrill.</p><a href="#chattanooga">Zur Karte</a></div>
+      </article>
+      <article class="card" data-i="2">
+        <img src="assets/img/raum_fruehstueck.webp" width="896" height="1120" alt="Aquarell: Frühstück mit Melange und Croissant" loading="lazy">
+        <div class="card-body"><span class="lvl lvl-eg">EG</span><h3>Frühstück</h3><p>Ab 8 Uhr früh, 365 Tage im Jahr.</p><a href="#chattanooga">Zum Chattanooga</a></div>
+      </article>
+      <article class="card" data-i="3">
+        <img src="assets/img/raum_keller.webp" width="896" height="1120" alt="Aquarell: Gewölbekeller mit Schank und Laternen" loading="lazy">
+        <div class="card-body"><span class="lvl lvl-ug">UG</span><h3>Gewölbekeller</h3><p>Bier vom Fass und Wirtshausküche unter Sandsteinbögen.</p><a href="#stadtbraeu">Zum Stadtbräu</a></div>
+      </article>
+      <article class="card" data-i="4">
+        <img src="assets/img/raum_tanz.webp" width="896" height="1120" alt="Aquarell: Tanzabend mit Jazztrio im Keller" loading="lazy">
+        <div class="card-body"><span class="lvl lvl-ug">UG</span><h3>Tanz &amp; Jazz</h3><p>Tanzabende und Jazz im Keller. Termine folgen.</p><a href="#termine">Zu den Terminen</a></div>
+      </article>
+    </div>
+    <div class="deck-nav">
+      <button class="deck-btn" id="prev" aria-label="Vorheriger Raum">&larr;</button>
+      <span class="deck-count" id="count" aria-live="polite">1 / 5</span>
+      <button class="deck-btn" id="next" aria-label="Nächster Raum">&rarr;</button>
+    </div>
+  </section>
+
+  <!-- OBEN -->
+  <section class="level level-eg" id="chattanooga" aria-labelledby="eg-title">
+    <span id="oben" class="anchor"></span>
+    <div class="level-inner">
+      <div class="level-intro">
+        <p class="eyebrow">Erdgeschoß</p>
+        <h2 id="eg-title" class="eg-name">Chattanooga</h2>
+        <p>Über ein halbes Jahrhundert am Graben: Wiener und internationale Küche, durchgehend ab 8 Uhr früh. Drinnen klimatisiert, draußen einer der größten Schanigärten der Innenstadt.</p>
+        <dl class="facts">
+          <div><dt>seit</dt><dd>1960</dd></div>
+          <div><dt>Plätze drinnen</dt><dd>70</dd></div>
+          <div><dt>im Schanigarten</dt><dd>~200</dd></div>
+          <div><dt>Tage im Jahr</dt><dd>365</dd></div>
+        </dl>
+      </div>
+      <div class="menu-card">
+        <div class="menu-head"><h3>Food Stars</h3><span class="note">Preise laut Karte Mai 2025</span></div>
+        <ul class="menu">
+          <li><span class="dish">Spareribs<small>auf Lavasteinen gegrillt, Pommes, Pusztasalat, Rib-Sauce</small></span><span class="dots"></span><span class="price">29,00</span></li>
+          <li><span class="dish">Wiener Schnitzel vom Kalb<small>mit hausgemachtem Kartoffelsalat · vom Schwein 18,50</small></span><span class="dots"></span><span class="price">28,90</span></li>
+          <li><span class="dish">Backhendl<small>vom österreichischen Hendl, Kartoffelsalat</small></span><span class="dots"></span><span class="price">18,00</span></li>
+          <li><span class="dish">Chattanooga Burger<small>österr. Rind, Brioche, Cheddar, Speck, Röstzwiebel</small></span><span class="dots"></span><span class="price">17,00</span></li>
+          <li><span class="dish">Chicken Basket<small>gebackene Hühnerstreifen, Pommes, Asia Sauce</small></span><span class="dots"></span><span class="price">15,50</span></li>
+          <li><span class="dish">Kaiserschmarrn<small>mit Zwetschkenröster</small></span><span class="dots"></span><span class="price">11,00</span></li>
+        </ul>
+        <div class="menu-actions">
+          <a class="btn btn-red" href="#chattanooga" aria-disabled="true">Ganze Speisekarte</a>
+          <span class="note">Interaktive Karte + Druck-PDF aus dem Editor, wie beim Adriano</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TREPPE -->
+  <div class="stairs" aria-hidden="true"><span>die Treppe hinunter</span></div>
+
+  <!-- UNTEN -->
+  <section class="level level-ug" id="stadtbraeu" aria-labelledby="ug-title">
+    <span id="unten" class="anchor"></span>
+    <div class="level-inner">
+      <div class="level-intro">
+        <p class="eyebrow">Gewölbekeller</p>
+        <h2 id="ug-title" class="ug-name">Wiener Stadtbräu</h2>
+        <p>Gehobene Gasthaustradition mitten in der Stadt: gepflegte Biere und Weine, urige Wiener Küche und Abende mit Musik. In zweiter Generation geführt von Isabella und Michael Funk.</p>
+        <div class="board" aria-label="Bier vom Fass">
+          <div class="board-head"><h3>Vom Fass</h3><span class="ph">Platzhalter, Bierkarte folgt</span></div>
+          <ul class="beers">
+            <li><span>Hausbier hell</span><span class="vol">0,3 / 0,5</span></li>
+            <li><span>Zwickl naturtrüb</span><span class="vol">0,3 / 0,5</span></li>
+            <li><span>Märzen</span><span class="vol">0,3 / 0,5</span></li>
+            <li><span>Weißbier</span><span class="vol">0,5</span></li>
+            <li><span>Saisonbier</span><span class="vol">0,3 / 0,5</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu-card menu-dark">
+        <div class="menu-head"><h3>Wirtshausküche</h3><span class="note">Platzhalter aus der Karte 2018</span></div>
+        <ul class="menu">
+          <li><span class="dish">Zwiebelrostbraten<small>Bratkartoffeln, Röstzwiebel, Gurkerl</small></span><span class="dots"></span><span class="price">20,80</span></li>
+          <li><span class="dish">Knusprige Schweinsstelze<small>Krautspecksalat, Kren, Hausbrot</small></span><span class="dots"></span><span class="price">21,50</span></li>
+          <li><span class="dish">Wiener Wirtshausgulasch<small>Butternockerl, Essiggurke, Sauerrahm</small></span><span class="dots"></span><span class="price">12,50</span></li>
+          <li><span class="dish">Käsekrainer vom Grill<small>Pusztasalat, Pommes, Senf</small></span><span class="dots"></span><span class="price">13,20</span></li>
+          <li><span class="dish">Krautfleckerl<small>hausgemacht, Sauerrahm, grüner Salat</small></span><span class="dots"></span><span class="price">12,50</span></li>
+        </ul>
+        <div class="week" id="termine" aria-label="Wochenprogramm">
+          <h3>Die Woche im Keller <span class="ph">laut Falter, bitte bestätigen</span></h3>
+          <ol class="days">
+            <li class="on"><b>Mo</b><span>Tanzabend</span><small>17–22</small></li>
+            <li class="on jazz"><b>Di</b><span>Jazz</span><small>ab 19</small></li>
+            <li><b>Mi</b><span>Bier &amp; Küche</span><small>ab 16</small></li>
+            <li><b>Do</b><span>Bier &amp; Küche</span><small>ab 16</small></li>
+            <li><b>Fr</b><span>Bier &amp; Küche</span><small>ab 16</small></li>
+            <li><b>Sa</b><span>Bier &amp; Küche</span><small>ab 16</small></li>
+            <li class="on"><b>So</b><span>Tanzabend</span><small>17–22</small></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BESUCH -->
+  <section class="visit" id="besuch" aria-labelledby="visit-title">
+    <div class="visit-inner">
+      <div>
+        <p class="eyebrow">Besuch</p>
+        <h2 id="visit-title">Graben 29a, 1010 Wien</h2>
+        <p>U1 / U3 Stephansplatz, zwei Minuten zu Fuß. Ein Eingang am Graben, die Treppe führt in den Keller.</p>
+        <a class="btn btn-ghost-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Graben%2029a%2C%201010%20Wien" target="_blank" rel="noopener">Route in Google Maps</a>
+      </div>
+      <div class="hours">
+        <h3>Öffnungszeiten</h3>
+        <table>
+          <tbody>
+            <tr><th scope="row">Chattanooga</th><td>täglich 8–24 Uhr<br><small>Küche bis 23:30</small></td></tr>
+            <tr><th scope="row">Wiener Stadtbräu</th><td>täglich ab 16 Uhr<br><small>Küche bis 22 Uhr · bitte bestätigen</small></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="contact">
+        <h3>Reservieren</h3>
+        <p class="phone"><span id="phone">+43 1 533 5000</span> <button class="copy" data-copy="phone" type="button">Kopieren</button></p>
+        <p>reservation@chattanooga.at</p>
+        <p class="note">Online-Reservierung: Tool noch offen</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <p>Chattanooga GmbH · Graben 29a · 1010 Wien</p>
+  <p><a href="#top">Impressum</a> · <a href="#top">Datenschutz</a> · Prototyp von La'ver Studio</p>
+</footer>
+
+<nav class="lift" aria-label="Etage wählen">
+  <span class="lift-ind" aria-hidden="true"></span>
+  <button class="lift-btn" data-go="eg" aria-label="Erdgeschoß, Chattanooga">EG</button>
+  <button class="lift-btn" data-go="ug" aria-label="Keller, Wiener Stadtbräu">UG</button>
+</nav>
+<!--BODY-END-->
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
