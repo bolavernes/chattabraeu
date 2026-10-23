@@ -1,37 +1,36 @@
-# Chattanooga & Wiener Stadtbräu – Website (Prototyp)
+# Chattanooga & Wiener Stadtbräu – Website (Prototyp, Richtung B)
 
-Eine Website für beide Lokale am Graben 29a, 1010 Wien: oben das **Chattanooga** (Café & Grill mit Schanigarten), unten das **Wiener Stadtbräu** (Gewölbekeller mit Bierfokus).
+Eine Website für beide Lokale am Graben 29a, 1010 Wien: oben das **Chattanooga** (Café & Grill mit Schanigarten), unten das **Wiener Stadtbräu** (Gewölbekeller).
 
-**Stand:** Klickbarer Prototyp. Die Illustration und die Raumbilder sind KI-Platzhalter (Higgsfield). Sie werden durch Bolas eigene Zeichnung (Feder + Aquarell, in Ebenen) ersetzt.
+## Die Idee
 
-## Was drin ist
+Der Hero ist ein Foto der Fassade, das zeigt, wie es **gerade jetzt** am Graben ist:
 
-- **Haus im Schnitt** (Hero): Wenn man über eine Etage fährt oder sie antippt, wird die andere abgedunkelt und die passende Karte darunter hervorgehoben. Ein Schalter wechselt zwischen Tag und Abend. Abends gehen oben die Lampen an, die Keller-Laternen flackern immer. Am Zapfhahn ist ein kleines Easter Egg.
-- **Live-Status**: zeigt „Jetzt geöffnet“ oder „Öffnet um …“ nach Wiener Zeit.
-- **Räume** als Kartenstapel nach Vorbild Brasserie Zédel. Man kann wischen, Pfeiltasten benutzen oder auf Karten klicken.
-- **Oben / Unten**: zwei Sektionen. Die Seite geht über „die Treppe“ von Papier in den dunklen Keller über.
-- **Lift-Panel** (EG/UG) springt zwischen den Etagen.
-- **Einstieg je Domain**: Unter `stadtbraeu.at` (oder mit `#unten`) öffnet die Seite mit dem Keller vorne.
+- **Tageszeit nach Sonnenstand:** Tag, Dämmerung (±40 Minuten um Sonnenauf- und -untergang) oder Nacht. Die Sonnenzeiten werden lokal berechnet, dafür braucht es keine API.
+- **Wetter live** von Open-Meteo (kostenlos, ohne Schlüssel). Bei Regen und Schnee fällt Regen bzw. Schnee über das Foto, bei Nebel liegt ein Schleier darüber. Auf dem Foto sind Hotspots für Chattanooga, die Stiege zum Stadtbräu und den Schanigarten.
+- **Schwarze Tafel darunter** mit dem Live-Stand, z. B. „Freitag, 11:34 am Graben. 11 Grad, bedeckt.“, und dem Status von Chattanooga, Schanigarten und Stadtbräu (offen, schließt bald, öffnet um …). Der Schanigarten ist bei Regen oder Schnee automatisch zu und im Winter auf „Winterpause“.
+- **Einstieg je Domain:** Unter `stadtbraeu.at` (oder mit `#unten`) steht das Stadtbräu vorne, und die Karte öffnet beim Stadtbräu.
 
-Es gibt keine Build-Pipeline, kein Tracking und keine Cookies.
+Danach kommen „Das Haus“ (links Chattanooga auf Weiß, rechts Stadtbräu auf Rot mit den Banner-Streifen), die Speisekarte mit Tabs pro Lokal und die Anfahrt mit Live-Öffnungszeiten.
+
+Der **Vorschau-Regler** (gelbe Leiste oben, nur im Prototyp) simuliert Uhrzeit, Wetter, Schanigarten-Saison und Domain.
+
+## Stand der Inhalte
+
+- **Fassadenfotos:** KI-Platzhalter (Higgsfield). Sie werden ersetzt durch drei echte Fotos vom selben Standpunkt (Tag, Dämmerung, Nacht), am besten von Timos Team mit Stativ.
+- **Logos:** aus den alten Websites nachgezeichnet (`assets/img` / SVG-Sprite in `index.html`). Für den Livegang braucht es die Original-Vektoren.
+- **Innenräume und Essen:** Fotos der alten Websites.
+- **Stadtbräu:** Karte von 2018, Termine laut Falter, Öffnungszeiten noch unbestätigt.
+
+## Einstellungen
+
+Öffnungszeiten und Schanigarten-Regeln stehen oben in `assets/js/site.js` (`CONFIG`). Später kommen sie aus dem Editor.
 
 ## Netlify
 
-Repository verbinden, Build-Befehl leer lassen, Publish-Verzeichnis `.` eintragen. Beide Domains (chattanooga.at, stadtbraeu.at) als Domains derselben Site anlegen.
-
-Solange es ein Prototyp ist, sind die Seiten über `robots.txt`, `X-Robots-Tag` und das Meta-Tag auf `noindex` gesetzt. **Vor dem Livegang alle drei entfernen.**
-
-## Aufbau
-
-| Pfad | Inhalt |
-|---|---|
-| `index.html` | die ganze Seite |
-| `assets/css/site.css` | Farben und Schriften stehen oben in `:root` |
-| `assets/js/site.js` | Etagenwahl, Tag/Abend, Kartenstapel, Lift, Öffnungsstatus, Einstieg je Domain |
-| `assets/img/` | Platzhalterbilder (WebP) |
+Repository verbinden, Build-Befehl leer lassen, Publish-Verzeichnis `.` eintragen, beide Domains auf dieselbe Site legen. Die Seite ist noch auf `noindex` gestellt (`robots.txt`, `X-Robots-Tag`, Meta-Tag). **Vor dem Livegang alle drei entfernen.**
 
 ## Nächste Schritte
 
-- Illustration in Ebenen liefern (Himmel, Fassade, Schanigarten, Café innen, Erdreich, Keller, Treppe, Lichter). Die Hotspot-Koordinaten in `index.html` (`.glows i`, `.tap`) werden dann angepasst.
-- Speisekarten-System vom Adriano übernehmen: `menu.json` pro Etage, Admin mit Etagen-Umschalter, A4-Druck je Marke.
-- Echte Inhalte vom Kunden (siehe `Checkliste_vom_Kunden.md` im Projektordner): Bierkarte, Öffnungszeiten Stadtbräu, Events, Impressum.
+- Speisekarten-System vom Adriano übernehmen: `menu.json` pro Lokal, Admin mit Lokal-Umschalter, A4-Druck je Marke. Öffnungszeiten und Schanigarten-Saison kommen in denselben Editor.
+- Echte Fotos und Inhalte vom Kunden (siehe `Checkliste_vom_Kunden.md` im Projektordner).
