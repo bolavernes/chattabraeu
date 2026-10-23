@@ -58,8 +58,9 @@
         <canvas class="wx-canvas" id="wx" aria-hidden="true"></canvas>
         <div class="fog" aria-hidden="true"></div>
 
-        <button class="pin pin-chatta pin-up" type="button" data-go="chatta" data-place="chatta" data-only="haus"><i class="lamp"></i><span>Chattanooga</span></button>
-        <button class="pin pin-braeu" type="button" data-go="braeu" data-place="braeu" data-only="haus braeu"><i class="lamp"></i><span data-only="haus">Wiener Stadtbräu, die Stiege hinunter</span><span data-only="braeu">Hier geht es hinunter</span></button>
+        <button class="sign sign-chatta" type="button" data-go="chatta" data-label="Zum Chattanooga" data-only="haus braeu" aria-label="Zum Chattanooga"></button>
+        <button class="sign sign-braeu-tuer" type="button" data-go="braeu" data-label="Zum Wiener Stadtbräu" data-only="haus chatta" aria-label="Zum Wiener Stadtbräu"></button>
+        <button class="sign sign-braeu-haengt" type="button" data-go="braeu" data-label="Zum Wiener Stadtbräu" data-only="haus chatta" aria-label="Zum Wiener Stadtbräu" tabindex="-1"></button>
         <a class="pin pin-garten" href="#c-garten" data-place="garten" data-only="chatta"><i class="lamp"></i><span>Schanigarten</span></a>
       </div>
     </div>

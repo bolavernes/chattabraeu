@@ -15,7 +15,7 @@ Für die Suchmaschinen sollten die beiden Lokale für den Livegang eigene Seiten
 Der Hero ist ein Foto der Fassade, das zeigt, wie es **gerade jetzt** am Graben ist:
 
 - **Tageszeit nach Sonnenstand:** Tag, Dämmerung (±40 Minuten um Sonnenauf- und -untergang) oder Nacht. Die Sonnenzeiten werden lokal berechnet, dafür braucht es keine API.
-- **Wetter live** von Open-Meteo (kostenlos, ohne Schlüssel). Bei Regen und Schnee fällt Regen bzw. Schnee über das Foto, bei Nebel liegt ein Schleier darüber. Auf dem Foto sind Hotspots für Chattanooga, die Stiege zum Stadtbräu und den Schanigarten.
+- **Wetter live** von Open-Meteo (kostenlos, ohne Schlüssel). Bei Regen und Schnee fällt Regen bzw. Schnee über das Foto, bei Nebel liegt ein Schleier darüber. Die Schilder auf dem Foto sind klickbar: Der Chattanooga-Schriftzug führt ins Chattanooga, die beiden Stadtbräu-Schilder ins Stadtbräu. Beim Drüberfahren leuchten sie auf, am Handy zeigt ein pulsierender Punkt, dass man tippen kann. Wenn echte Fotos kommen, müssen die Koordinaten von `.sign-*` in `site.css` angepasst werden.
 - **Schwarze Tafel darunter** mit dem Live-Stand, z. B. „Freitag, 11:34 am Graben. 11 Grad, bedeckt.“, und dem Status von Chattanooga, Schanigarten und Stadtbräu (offen, schließt bald, öffnet um …). Der Schanigarten ist bei Regen oder Schnee automatisch zu und im Winter auf „Winterpause“.
 
 Der **Vorführ-Regler** (nur im Prototyp, liegt auf dem Foto) steuert Uhrzeit (mit Zeitraffer), Wetter, Schanigarten-Saison und den Einstieg (Haus, chattanooga.at, stadtbraeu.at). Ausblenden lässt er sich über die gelbe Leiste. Bei Regen und Schnee wird jeweils ein eigenes Foto geladen, mit nassem Pflaster bzw. Schnee am Boden.
