@@ -25,22 +25,25 @@
 </div>
 
 <header class="head" id="head">
-  <a class="head-logos" href="#top" aria-label="Chattanooga und Wiener Stadtbräu, zum Seitenanfang">
-    <svg class="logo logo-chatta" viewBox="0 0 201.9 56.5"><use href="#logo-chatta"/></svg>
-    <svg class="logo logo-braeu" viewBox="0 0 429 98"><use href="#logo-braeu"/></svg>
+  <a class="head-logos" href="#haus" data-go="haus" aria-label="Zum Haus am Graben">
+    <svg class="logo logo-chatta" data-only="haus chatta" viewBox="0 0 201.9 56.5" role="img" aria-label="Chattanooga"><use href="#logo-chatta"/></svg>
+    <svg class="logo logo-braeu" data-only="haus braeu" viewBox="0 0 429 98" role="img" aria-label="Wiener Stadtbräu"><use href="#logo-braeu"/></svg>
   </a>
   <nav class="head-nav" aria-label="Hauptnavigation">
-    <a href="#etagen">Das Haus</a>
-    <a href="#karte">Speisekarte</a>
+    <a href="#c-karte" data-only="chatta">Speisekarte</a>
+    <a href="#c-garten" data-only="chatta">Schanigarten</a>
+    <a href="#b-karte" data-only="braeu">Bier &amp; Küche</a>
+    <a href="#b-woche" data-only="braeu">Termine</a>
     <a href="#besuch">Anfahrt</a>
   </nav>
   <a class="btn btn-red head-cta" href="#besuch">Reservieren</a>
 </header>
 
 <main id="top">
+  <h1 class="sr" id="h1">Chattanooga und Wiener Stadtbräu, Graben 29a, Wien</h1>
+
   <!-- HERO: das Haus, wie es gerade ist -->
   <section class="hero" aria-labelledby="h1">
-    <h1 id="h1" class="sr">Chattanooga und Wiener Stadtbräu, Graben 29a, Wien</h1>
     <div class="photo" id="photo" data-phase="tag" data-wx="clear">
       <div class="frame">
         <img class="ph on" data-phase="tag" data-wx="clear" src="assets/img/fassade_tag-2400.webp" srcset="assets/img/fassade_tag-1200.webp 1200w, assets/img/fassade_tag-2400.webp 2400w" alt="Das Haus am Graben: Eingang Chattanooga mit rotem Vordach, daneben die Stiege zum Wiener Stadtbräu, rechts der Schanigarten" sizes="(max-width: 800px) 200vw, 100vw" width="2400" height="1357">
@@ -55,9 +58,9 @@
         <canvas class="wx-canvas" id="wx" aria-hidden="true"></canvas>
         <div class="fog" aria-hidden="true"></div>
 
-        <a class="pin pin-chatta pin-up" href="#etagen" data-place="chatta"><i class="lamp"></i><span>Chattanooga</span></a>
-        <a class="pin pin-braeu" href="#etagen" data-place="braeu"><i class="lamp"></i><span>Wiener Stadtbräu, die Stiege hinunter</span></a>
-        <a class="pin pin-garten" href="#besuch" data-place="garten"><i class="lamp"></i><span>Schanigarten</span></a>
+        <button class="pin pin-chatta pin-up" type="button" data-go="chatta" data-place="chatta" data-only="haus"><i class="lamp"></i><span>Chattanooga</span></button>
+        <button class="pin pin-braeu" type="button" data-go="braeu" data-place="braeu" data-only="haus braeu"><i class="lamp"></i><span data-only="haus">Wiener Stadtbräu, die Stiege hinunter</span><span data-only="braeu">Hier geht es hinunter</span></button>
+        <a class="pin pin-garten" href="#c-garten" data-place="garten" data-only="chatta"><i class="lamp"></i><span>Schanigarten</span></a>
       </div>
     </div>
 
@@ -82,7 +85,12 @@
         </div>
         <div class="dock-opts">
           <label><input type="checkbox" id="dock-season" checked> Schanigarten-Saison</label>
-          <label><input type="checkbox" id="dock-entry"> Einstieg stadtbraeu.at</label>
+          <label for="dock-entry">Einstieg</label>
+          <select id="dock-entry">
+            <option value="haus">Haus</option>
+            <option value="chatta">chattanooga.at</option>
+            <option value="braeu">stadtbraeu.at</option>
+          </select>
           <button type="button" class="dock-live" id="dock-live">Jetzt</button>
         </div>
       </div>
@@ -90,54 +98,58 @@
 
     <div class="board" id="board">
       <p class="now" id="now" aria-live="polite">Graben 29a, Wien.</p>
-      <ul class="states">
-        <li class="state" data-place="chatta">
-          <a href="#etagen"><i class="lamp"></i><b>Chattanooga</b><span class="st">täglich 8 bis 24 Uhr</span></a>
-        </li>
-        <li class="state" data-place="garten">
-          <a href="#besuch"><i class="lamp"></i><b>Schanigarten</b><span class="st">bei Schönwetter</span></a>
-        </li>
-        <li class="state" data-place="braeu">
-          <a href="#etagen"><i class="lamp"></i><b>Wiener Stadtbräu</b><span class="st">täglich ab 16 Uhr</span></a>
-        </li>
+
+      <!-- Hausansicht: zwei Türen -->
+      <div class="doors" data-only="haus">
+        <button class="door door-chatta" type="button" data-go="chatta" data-place="chatta">
+          <span class="door-floor">Oben</span>
+          <svg class="logo" viewBox="0 0 201.9 56.5" role="img" aria-label="Chattanooga"><use href="#logo-chatta"/></svg>
+          <span class="door-what">Café &amp; Grill mit Schanigarten</span>
+          <span class="door-st"><i class="lamp"></i><span class="st">täglich 8 bis 24 Uhr</span></span>
+        </button>
+        <button class="door door-braeu" type="button" data-go="braeu" data-place="braeu">
+          <span class="door-floor">Unten</span>
+          <svg class="logo" viewBox="0 0 429 98" role="img" aria-label="Wiener Stadtbräu"><use href="#logo-braeu"/></svg>
+          <span class="door-what">Gewölbekeller, Bier vom Fass</span>
+          <span class="door-st"><i class="lamp"></i><span class="st">täglich ab 16 Uhr</span></span>
+        </button>
+      </div>
+
+      <!-- Lokalansicht: eigener Status, das andere Lokal nur als Zeile -->
+      <ul class="states" data-only="chatta braeu">
+        <li class="state" data-place="chatta" data-only="chatta"><a href="#c-karte"><i class="lamp"></i><b>Chattanooga</b><span class="st">täglich 8 bis 24 Uhr</span></a></li>
+        <li class="state" data-place="garten" data-only="chatta"><a href="#c-garten"><i class="lamp"></i><b>Schanigarten</b><span class="st">bei Schönwetter</span></a></li>
+        <li class="state" data-place="braeu" data-only="braeu"><a href="#b-karte"><i class="lamp"></i><b>Wiener Stadtbräu</b><span class="st">täglich ab 16 Uhr</span></a></li>
       </ul>
+      <p class="neighbor" data-only="chatta"><button type="button" data-go="braeu" data-place="braeu">Unten im Haus: Wiener Stadtbräu, <span class="st">ab 16 Uhr</span></button></p>
+      <p class="neighbor" data-only="braeu"><button type="button" data-go="chatta" data-place="chatta">Oben im Haus: Chattanooga, <span class="st">8 bis 24 Uhr</span></button></p>
     </div>
   </section>
 
-  <!-- DAS HAUS: zwei Etagen -->
-  <section class="split" id="etagen" aria-label="Zwei Lokale in einem Haus">
-    <article class="half half-chatta" id="chattanooga">
-      <h2 class="sr">Chattanooga</h2>
+  <!-- ================= CHATTANOOGA ================= -->
+  <section class="intro intro-chatta" data-only="chatta" aria-label="Über das Chattanooga">
+    <div class="intro-text">
       <svg class="logo logo-big" viewBox="0 0 201.9 56.5" aria-hidden="true"><use href="#logo-chatta"/></svg>
-      <img src="assets/img/innen-chattanooga.webp" width="800" height="533" alt="Gäste im Chattanooga, rote Wände und runde Tische" loading="lazy">
-      <p class="half-text">Café &amp; Grill im Erdgeschoß, seit 1960. Frühstück ab 8, Spareribs vom Lavasteingrill und knapp 200 Plätze im Schanigarten.</p>
-      <a class="btn btn-red" href="#karte" data-tab="chatta">Speisekarte</a>
-    </article>
-    <article class="half half-braeu" id="stadtbraeu">
-      <span id="unten" class="anchor"></span>
-      <h2 class="sr">Wiener Stadtbräu</h2>
-      <svg class="logo logo-big logo-banner" viewBox="0 0 429 98" aria-hidden="true"><use href="#logo-braeu"/></svg>
-      <img src="assets/img/keller-gewoelbe.webp" width="1400" height="788" alt="Der Gewölbekeller des Wiener Stadtbräu mit Laternen und Wandmalereien" loading="lazy">
-      <p class="half-text">Gewölbekeller. Bier vom Fass, Wirtshausküche, Tanz und Jazz. In zweiter Generation von Isabella und Michael Funk geführt.</p>
-      <a class="btn btn-white" href="#karte" data-tab="braeu">Bierkarte</a>
-    </article>
+      <p class="intro-lede">Café &amp; Grill im Erdgeschoß, seit 1960 am Graben. Wiener und internationale Küche, durchgehend ab 8 Uhr früh.</p>
+      <dl class="facts">
+        <div><dt>seit</dt><dd>1960</dd></div>
+        <div><dt>Plätze drinnen</dt><dd>70</dd></div>
+        <div><dt>im Schanigarten</dt><dd>200</dd></div>
+        <div><dt>Tage im Jahr offen</dt><dd>365</dd></div>
+      </dl>
+    </div>
+    <img src="assets/img/innen-chattanooga.webp" width="800" height="533" alt="Gäste im Chattanooga, rote Wände und runde Tische" loading="lazy">
   </section>
 
-  <!-- SPEISEKARTE -->
-  <section class="menu" id="karte" aria-labelledby="karte-title">
+  <section class="menu" id="c-karte" data-only="chatta" aria-labelledby="c-karte-title">
     <div class="menu-top">
-      <h2 id="karte-title" class="sr">Speisekarte</h2>
-      <div class="tabs" role="tablist" aria-label="Lokal wählen">
-        <button role="tab" id="tab-chatta" aria-controls="panel-chatta" aria-selected="true">Chattanooga</button>
-        <button role="tab" id="tab-braeu" aria-controls="panel-braeu" aria-selected="false" tabindex="-1">Wiener Stadtbräu</button>
-      </div>
+      <h2 id="c-karte-title">Speisekarte</h2>
       <div class="menu-btns">
-        <a class="btn btn-line" href="#karte" aria-disabled="true">Ganze Karte</a>
-        <a class="btn btn-line" href="#karte" aria-disabled="true">Als PDF</a>
+        <a class="btn btn-line" href="#c-karte" aria-disabled="true">Ganze Karte</a>
+        <a class="btn btn-line" href="#c-karte" aria-disabled="true">Als PDF</a>
       </div>
     </div>
-
-    <div class="panel" role="tabpanel" id="panel-chatta" aria-labelledby="tab-chatta">
+    <div class="panel">
       <figure class="star">
         <h3>Spareribs vom Lavasteingrill</h3>
         <img src="assets/img/spareribs.webp" width="800" height="500" alt="Spareribs mit Pommes und Pusztasalat" loading="lazy">
@@ -152,51 +164,79 @@
       </ul>
       <p class="fine">Preise laut Karte Mai 2025, in Euro inkl. aller Abgaben. Alle Speisen auch zum Mitnehmen.</p>
     </div>
+  </section>
 
-    <div class="panel" role="tabpanel" id="panel-braeu" aria-labelledby="tab-braeu" hidden>
+  <section class="garden" id="c-garten" data-only="chatta" aria-labelledby="c-garten-title">
+    <img src="assets/img/schanigarten.webp" width="800" height="533" alt="Der Schanigarten des Chattanooga am Graben mit weißen Schirmen" loading="lazy">
+    <div class="garden-text" data-place="garten">
+      <h2 id="c-garten-title">Schanigarten am Graben</h2>
+      <p>Knapp 200 Plätze mitten in der Fußgängerzone, mit Blick auf die Pestsäule.</p>
+      <p class="garden-st"><i class="lamp"></i><span class="st">bei Schönwetter</span></p>
+    </div>
+  </section>
+
+  <!-- ================= WIENER STADTBRÄU ================= -->
+  <section class="intro intro-braeu" data-only="braeu" aria-label="Über das Wiener Stadtbräu">
+    <div class="intro-text">
+      <svg class="logo logo-big" viewBox="0 0 429 98" aria-hidden="true"><use href="#logo-braeu"/></svg>
+      <p class="intro-lede">Gewölbekeller unter dem Graben. Bier vom Fass, Wirtshausküche, Tanz und Jazz. In zweiter Generation von Isabella und Michael Funk geführt.</p>
+    </div>
+    <img src="assets/img/keller-gewoelbe.webp" width="1400" height="788" alt="Der Gewölbekeller des Wiener Stadtbräu mit Laternen und Wandmalereien" loading="lazy">
+  </section>
+
+  <section class="menu" id="b-karte" data-only="braeu" aria-labelledby="b-karte-title">
+    <div class="menu-top">
+      <h2 id="b-karte-title">Bier &amp; Küche</h2>
+      <div class="menu-btns">
+        <a class="btn btn-line" href="#b-karte" aria-disabled="true">Ganze Karte</a>
+        <a class="btn btn-line" href="#b-karte" aria-disabled="true">Als PDF</a>
+      </div>
+    </div>
+    <div class="panel">
       <figure class="star">
         <h3>Bier vom Fass</h3>
         <img src="assets/img/keller-kueche.webp" width="1200" height="675" alt="Teller aus der Küche des Wiener Stadtbräu" loading="lazy">
         <figcaption><span class="big-price">5</span><span>Biere offen, laut Falter. Welche genau, steht auf der neuen Bierkarte.</span></figcaption>
       </figure>
-      <div class="dishes-wrap">
-        <ul class="dishes">
-          <li><h4>Zwiebelrostbraten <small>A L M O</small></h4><p>Bratkartoffeln, Röstzwiebel, Gurkerl, Zwiebelsauce, Senf.</p><span class="price">20,80</span></li>
-          <li><h4>Knusprige Schweinsstelze <small>A O</small></h4><p>Krautspecksalat, Jungzwiebel, Kren, Hausbrot. 25 Minuten Zubereitung.</p><span class="price">21,50</span></li>
-          <li><h4>Wiener Wirtshausgulasch <small>A C G</small></h4><p>Butternockerl, Essiggurke, Sauerrahm.</p><span class="price">12,50</span></li>
-          <li><h4>Käsekrainer vom Grill <small>A G L M</small></h4><p>Pusztasalat, Pommes Frites, Senf.</p><span class="price">13,20</span></li>
-        </ul>
-        <div class="week" id="termine">
-          <h4>Diese Woche im Keller</h4>
-          <ol class="days">
-            <li data-wd="Mo" class="ev"><b>Mo</b>Tanz 17–22</li>
-            <li data-wd="Di" class="ev"><b>Di</b>Jazz ab 19</li>
-            <li data-wd="Mi"><b>Mi</b>ab 16</li>
-            <li data-wd="Do"><b>Do</b>ab 16</li>
-            <li data-wd="Fr"><b>Fr</b>ab 16</li>
-            <li data-wd="Sa"><b>Sa</b>ab 16</li>
-            <li data-wd="So" class="ev"><b>So</b>Tanz 17–22</li>
-          </ol>
-        </div>
-      </div>
-      <p class="fine">Platzhalter: Gerichte und Preise aus der Karte 2018, Termine laut Falter. Kommt alles neu vom Kunden.</p>
+      <ul class="dishes">
+        <li><h4>Zwiebelrostbraten <small>A L M O</small></h4><p>Bratkartoffeln, Röstzwiebel, Gurkerl, Zwiebelsauce, Senf.</p><span class="price">20,80</span></li>
+        <li><h4>Knusprige Schweinsstelze <small>A O</small></h4><p>Krautspecksalat, Jungzwiebel, Kren, Hausbrot. 25 Minuten Zubereitung.</p><span class="price">21,50</span></li>
+        <li><h4>Wiener Wirtshausgulasch <small>A C G</small></h4><p>Butternockerl, Essiggurke, Sauerrahm.</p><span class="price">12,50</span></li>
+        <li><h4>Käsekrainer vom Grill <small>A G L M</small></h4><p>Pusztasalat, Pommes Frites, Senf.</p><span class="price">13,20</span></li>
+      </ul>
+      <p class="fine">Platzhalter: Gerichte und Preise aus der Karte 2018. Kommt neu vom Kunden.</p>
     </div>
   </section>
 
-  <!-- ANFAHRT -->
+  <section class="week" id="b-woche" data-only="braeu" aria-labelledby="b-woche-title">
+    <h2 id="b-woche-title">Diese Woche im Keller</h2>
+    <ol class="days">
+      <li data-wd="Mo" class="ev"><b>Mo</b>Tanzabend<small>17–22 Uhr</small></li>
+      <li data-wd="Di" class="ev"><b>Di</b>Jazz<small>ab 19 Uhr</small></li>
+      <li data-wd="Mi"><b>Mi</b>Bier &amp; Küche<small>ab 16 Uhr</small></li>
+      <li data-wd="Do"><b>Do</b>Bier &amp; Küche<small>ab 16 Uhr</small></li>
+      <li data-wd="Fr"><b>Fr</b>Bier &amp; Küche<small>ab 16 Uhr</small></li>
+      <li data-wd="Sa"><b>Sa</b>Bier &amp; Küche<small>ab 16 Uhr</small></li>
+      <li data-wd="So" class="ev"><b>So</b>Tanzabend<small>17–22 Uhr</small></li>
+    </ol>
+    <p class="fine">Termine laut Falter, bitte beim Kunden bestätigen.</p>
+  </section>
+
+  <!-- ================= ANFAHRT (alle) ================= -->
   <section class="visit" id="besuch" aria-labelledby="besuch-title">
     <div class="visit-grid">
       <div class="visit-where">
         <h2 id="besuch-title">Graben 29a, 1010 Wien</h2>
-        <p>U1 und U3 Stephansplatz, zwei Minuten zu Fuß. Der Eingang zum Chattanooga ist unter dem roten Vordach, gleich rechts geht die Stiege hinunter ins Stadtbräu.</p>
+        <p data-only="haus chatta">U1 und U3 Stephansplatz, zwei Minuten zu Fuß. Der Eingang ist unter dem roten Vordach.</p>
+        <p data-only="braeu">U1 und U3 Stephansplatz, zwei Minuten zu Fuß. Gleich rechts neben dem Chattanooga geht die Stiege hinunter in den Keller.</p>
         <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Graben%2029a%2C%201010%20Wien" target="_blank" rel="noopener">In Google Maps öffnen</a>
       </div>
       <table class="hours">
         <caption>Öffnungszeiten</caption>
         <tbody>
-          <tr data-place="chatta"><th scope="row">Chattanooga</th><td>täglich 8 bis 24 Uhr<br><small>Küche bis 23:30</small></td><td class="live"></td></tr>
-          <tr data-place="garten"><th scope="row">Schanigarten</th><td>täglich 8 bis 23 Uhr<br><small>bei Schönwetter, bitte bestätigen</small></td><td class="live"></td></tr>
-          <tr data-place="braeu"><th scope="row">Wiener Stadtbräu</th><td>täglich 16 bis 23 Uhr<br><small>Küche bis 22, bitte bestätigen</small></td><td class="live"></td></tr>
+          <tr data-place="chatta" data-only="haus chatta"><th scope="row">Chattanooga</th><td>täglich 8 bis 24 Uhr<br><small>Küche bis 23:30</small></td><td class="live"></td></tr>
+          <tr data-place="garten" data-only="haus chatta"><th scope="row">Schanigarten</th><td>täglich 8 bis 23 Uhr<br><small>bei Schönwetter, bitte bestätigen</small></td><td class="live"></td></tr>
+          <tr data-place="braeu" data-only="haus braeu"><th scope="row">Wiener Stadtbräu</th><td>täglich 16 bis 23 Uhr<br><small>Küche bis 22, bitte bestätigen</small></td><td class="live"></td></tr>
         </tbody>
       </table>
       <div class="visit-call">
@@ -209,11 +249,12 @@
 </main>
 
 <footer class="foot">
-  <svg class="logo" viewBox="0 0 201.9 56.5" aria-hidden="true"><use href="#logo-chatta"/></svg>
-  <svg class="logo logo-banner" viewBox="0 0 429 98" aria-hidden="true"><use href="#logo-braeu"/></svg>
-  <p>Chattanooga GmbH, Graben 29a, 1010 Wien. <a href="#top">Impressum</a> <a href="#top">Datenschutz</a></p>
+  <svg class="logo" data-only="haus chatta" viewBox="0 0 201.9 56.5" aria-hidden="true"><use href="#logo-chatta"/></svg>
+  <svg class="logo logo-banner" data-only="haus braeu" viewBox="0 0 429 98" aria-hidden="true"><use href="#logo-braeu"/></svg>
+  <p class="foot-neighbor" data-only="chatta"><button type="button" data-go="braeu">Unten im Haus: Wiener Stadtbräu</button></p>
+  <p class="foot-neighbor" data-only="braeu"><button type="button" data-go="chatta">Oben im Haus: Chattanooga</button></p>
+  <p class="foot-legal">Chattanooga GmbH, Graben 29a, 1010 Wien. <a href="#top">Impressum</a> <a href="#top">Datenschutz</a></p>
 </footer>
-
 <!--BODY-END-->
 <script src="assets/js/site.js" defer></script>
 </body>

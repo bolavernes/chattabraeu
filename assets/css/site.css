@@ -73,7 +73,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .head-logos { display: flex; align-items: center; gap: 18px; text-decoration: none; }
 .head .logo-chatta { height: 38px; width: auto; aspect-ratio: 201.9 / 56.5; }
 .head .logo-braeu { height: 30px; width: auto; aspect-ratio: 429 / 98; }
-body[data-entry="braeu"] .head-logos { flex-direction: row-reverse; }
 .head-nav { display: flex; gap: 26px; margin-left: auto; font: 600 1.05rem/1 var(--f-ui); }
 .head-nav a { text-decoration: none; color: #d9d9d9; }
 .head-nav a:hover { color: var(--weiss); }
@@ -131,42 +130,10 @@ body[data-entry="braeu"] .head-logos { flex-direction: row-reverse; }
 .state .st { grid-column: 2; color: #cfcfcf; font: 500 1rem/1.3 var(--f-ui); }
 .state a:hover b { color: var(--rot); }
 .state[data-state="offen"] .st { color: var(--weiss); }
-body[data-entry="braeu"] .state[data-place="braeu"] { order: -1; }
-body[data-entry="braeu"] .state[data-place="braeu"] + .state a,
-body[data-entry="braeu"] .state[data-place="chatta"] a { padding-left: 18px; border-left: 1px solid #333; }
-body[data-entry="braeu"] .state[data-place="braeu"] a { padding-left: 0; border-left: 0; }
-
-/* ---------- Zwei Etagen ---------- */
-.split { display: grid; grid-template-columns: 1fr 1fr; }
-.split > * { min-width: 0; }
-.half { display: grid; gap: 26px; align-content: start; justify-items: start; padding: 72px clamp(20px, 5vw, 80px) 80px; }
-.half-chatta { padding-left: max(var(--gl), clamp(20px, 5vw, 80px)); }
-.half-braeu { padding-right: max(var(--gr), clamp(20px, 5vw, 80px)); }
-.half img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
-.half-text { font: 600 clamp(1.3rem, 2vw, 1.65rem)/1.2 var(--f-ui); max-width: 30ch; }
-.logo-big { width: min(100%, 440px); height: auto; }
-.half-chatta .logo-big { aspect-ratio: 201.9 / 56.5; }
-.half-braeu .logo-big { aspect-ratio: 429 / 98; color: var(--weiss); }
-.half-braeu {
-  background:
-    linear-gradient(var(--weiss), var(--weiss)) 0 22px / 100% 6px no-repeat,
-    linear-gradient(var(--weiss), var(--weiss)) 0 36px / 100% 2px no-repeat,
-    linear-gradient(var(--weiss), var(--weiss)) 0 calc(100% - 36px) / 100% 2px no-repeat,
-    linear-gradient(var(--weiss), var(--weiss)) 0 calc(100% - 22px) / 100% 6px no-repeat,
-    var(--rot);
-  color: var(--weiss);
-}
-.half-braeu .half-text { font-family: var(--f-schild); font-weight: 800; font-size: clamp(1.7rem, 2.8vw, 2.4rem); line-height: 1.05; }
 
 /* ---------- Speisekarte ---------- */
 .menu { padding: 80px var(--gr) 90px var(--gl); max-width: 1360px; margin: 0 auto; }
 .menu-top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; border-bottom: 2px solid var(--rot); margin-bottom: 40px; }
-.tabs { display: flex; gap: 6px; }
-.tabs button {
-  border: 0; background: transparent; cursor: pointer; padding: 10px 18px 12px; margin-bottom: -2px;
-  font: 700 clamp(1.3rem, 2vw, 1.6rem)/1 var(--f-ui); color: var(--text); border-bottom: 5px solid transparent;
-}
-.tabs button[aria-selected="true"] { color: var(--rot); border-bottom-color: var(--rot); }
 .menu-btns { display: flex; gap: 10px; padding-bottom: 12px; }
 .menu-btns .btn { min-height: 40px; }
 .panel { display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; align-items: start; }
@@ -221,7 +188,6 @@ body[data-entry="braeu"] .state[data-place="braeu"] a { padding-left: 0; border-
 }
 .foot .logo { height: 34px; width: auto; aspect-ratio: 201.9 / 56.5; }
 .foot .logo-banner { height: 28px; aspect-ratio: 429 / 98; }
-.foot p { margin-left: auto; font: 500 .95rem/1.4 var(--f-ui); }
 .foot a { margin-left: 12px; }
 
 /* ---------- Vorführ-Regler (nur Prototyp) ---------- */
@@ -261,6 +227,104 @@ body[data-entry="braeu"] .state[data-place="braeu"] a { padding-left: 0; border-
 .dock-opts input { accent-color: var(--rot); width: 16px; height: 16px; }
 .dock-live { border-color: var(--rot); }
 
+
+/* ---------- Ansichten: Haus, Chattanooga, Stadtbräu ---------- */
+body[data-view="haus"] [data-only]:not([data-only~="haus"]),
+body[data-view="chatta"] [data-only]:not([data-only~="chatta"]),
+body[data-view="braeu"] [data-only]:not([data-only~="braeu"]) { display: none !important; }
+
+.frame { transition: scale 1.3s cubic-bezier(.3, .7, .2, 1); transform-origin: 50% 50%; }
+body[data-view="chatta"] .frame { scale: 1.14; transform-origin: 32% 38%; }
+body[data-view="braeu"] .frame { scale: 1.32; transform-origin: 46% 64%; }
+
+.doors { max-width: 1320px; margin: 4px auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.door {
+  display: grid; justify-items: start; align-content: start; gap: 10px; text-align: left;
+  padding: 20px 22px 18px; border: 0; cursor: pointer; font: inherit;
+  transition: transform .2s, background .2s;
+}
+.door:hover { transform: translateY(-2px); }
+.door .logo { height: 54px; width: auto; }
+.door-chatta { background: var(--weiss); color: var(--text); }
+.door-chatta .logo { aspect-ratio: 201.9 / 56.5; color: var(--rot); }
+.door-braeu {
+  color: var(--weiss);
+  background:
+    linear-gradient(var(--weiss), var(--weiss)) 0 10px / 100% 4px no-repeat,
+    linear-gradient(var(--weiss), var(--weiss)) 0 18px / 100% 1.5px no-repeat,
+    var(--rot);
+  padding-top: 30px;
+}
+.door-braeu .logo { aspect-ratio: 429 / 98; height: 46px; color: var(--weiss); }
+.door-braeu:hover { background-color: var(--rot-dunkel); }
+.door-floor { font: 800 1rem/1 var(--f-ui); letter-spacing: .02em; opacity: .7; }
+.door-what { font: 700 1.25rem/1.15 var(--f-ui); }
+.door-st { display: inline-flex; align-items: center; gap: 8px; font: 500 1rem/1.2 var(--f-ui); }
+.door-chatta .door-st { color: var(--grau); }
+.door-chatta[data-state="offen"] .door-st { color: var(--text); }
+
+.neighbor { max-width: 1320px; margin: 14px auto 0; }
+.neighbor button, .foot-neighbor button {
+  border: 0; background: transparent; padding: 4px 0; cursor: pointer;
+  font: 500 1rem/1.3 var(--f-ui); color: #bdbdbd; text-decoration: underline; text-decoration-color: #555; text-underline-offset: 4px;
+}
+.neighbor button:hover { color: var(--weiss); text-decoration-color: var(--weiss); }
+
+.intro { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: center; padding: 80px var(--gr) 80px var(--gl); }
+.intro > * { min-width: 0; }
+.intro-text { display: grid; gap: 26px; justify-items: start; max-width: 620px; justify-self: end; }
+.intro img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.intro .logo-big { width: min(100%, 460px); height: auto; }
+.intro-chatta .logo-big { aspect-ratio: 201.9 / 56.5; }
+.intro-lede { font: 600 clamp(1.4rem, 2.2vw, 1.85rem)/1.2 var(--f-ui); max-width: 30ch; }
+.intro-braeu {
+  color: var(--weiss);
+  background:
+    linear-gradient(var(--weiss), var(--weiss)) 0 22px / 100% 6px no-repeat,
+    linear-gradient(var(--weiss), var(--weiss)) 0 36px / 100% 2px no-repeat,
+    linear-gradient(var(--weiss), var(--weiss)) 0 calc(100% - 36px) / 100% 2px no-repeat,
+    linear-gradient(var(--weiss), var(--weiss)) 0 calc(100% - 22px) / 100% 6px no-repeat,
+    var(--rot);
+}
+.intro-braeu .logo-big { aspect-ratio: 429 / 98; color: var(--weiss); }
+.intro-braeu .intro-lede { font-family: var(--f-schild); font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.05; }
+.facts { display: grid; grid-template-columns: repeat(4, auto); gap: 10px 28px; margin: 0; }
+.facts div { border-top: 2px solid var(--rot); padding-top: 8px; }
+.facts dt { font: 500 .85rem/1.2 var(--f-ui); color: var(--grau); }
+.facts dd { margin: 4px 0 0; font: 900 2.4rem/1 var(--f-schild); color: var(--rot); font-variant-numeric: tabular-nums; }
+
+.garden { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; padding: 0 var(--gr) 90px var(--gl); max-width: 1360px; margin: 0 auto; }
+.garden > * { min-width: 0; }
+.garden img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.garden-text { display: grid; gap: 14px; }
+.garden h2 { font: 900 clamp(2.4rem, 4.6vw, 3.8rem)/.92 var(--f-schild); color: var(--rot); }
+.garden-st { display: inline-flex; align-items: center; gap: 10px; font: 700 1.3rem/1.2 var(--f-ui); }
+
+.week { max-width: 1360px; margin: 0 auto; padding: 0 var(--gr) 90px var(--gl); }
+.week h2 { font: 900 clamp(2.4rem, 4.6vw, 3.8rem)/.92 var(--f-schild); color: var(--rot); margin-bottom: 20px; }
+.week .days li { padding: 14px 12px; font-size: 1rem; }
+.week .days b { font-size: 1.6rem; }
+.week .days small { display: block; opacity: .8; font-variant-numeric: tabular-nums; }
+.week .fine { margin-top: 12px; }
+.menu-top h2 { font: 900 clamp(2.4rem, 4.6vw, 3.8rem)/.92 var(--f-schild); color: var(--rot); padding-bottom: 14px; }
+
+.foot-neighbor button { color: var(--text); text-decoration-color: var(--rot); }
+.foot-neighbor button:hover { color: var(--rot); }
+.foot-legal { margin-left: auto; font: 500 .95rem/1.4 var(--f-ui); }
+
+@media (max-width: 980px) {
+  .intro, .garden { grid-template-columns: 1fr; }
+  .intro-text { justify-self: start; }
+}
+@media (max-width: 760px) {
+  .doors { grid-template-columns: 1fr; }
+  .door .logo { height: 42px; }
+  .door-braeu .logo { height: 34px; }
+  .intro { padding: 56px var(--gr) 56px var(--gl); }
+  .facts { grid-template-columns: repeat(2, auto); }
+  .foot-legal { margin-left: 0; }
+}
+
 /* ---------- Schmal ---------- */
 @media (max-width: 980px) {
   .head-nav { display: none; }
@@ -286,12 +350,7 @@ body[data-entry="braeu"] .state[data-place="braeu"] a { padding-left: 0; border-
   .states { grid-template-columns: 1fr; }
   .state a, .state + .state a { padding: 12px 0; border-left: 0; }
   .state + .state { border-top: 1px solid #333; }
-  body[data-entry="braeu"] .state a { padding-left: 0 !important; border-left: 0 !important; }
-  .split { grid-template-columns: 1fr; }
-  .half { padding: 56px var(--gr) 60px var(--gl); }
-  .days { grid-template-columns: repeat(4, 1fr); }
-  .tabs button { padding: 10px 10px 12px; font-size: 1.25rem; }
-  .foot p { margin-left: 0; }
+    .days { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {

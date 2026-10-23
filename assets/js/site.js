@@ -202,39 +202,49 @@
     for (const key of Object.keys(CONFIG.places)) {
       const s = stateOf(key, mins, wx);
       $$(`[data-place="${key}"]`).forEach((el) => { el.dataset.state = s.state; });
-      $$(`.state[data-place="${key}"] .st`).forEach((el) => { el.textContent = s.text; });
+      $$(`[data-place="${key}"] .st`).forEach((el) => { el.textContent = s.text; });
       $$(`.hours tr[data-place="${key}"] .live`).forEach((el) => { el.textContent = s.state === 'offen' ? 'jetzt offen' : s.state === 'bald' ? s.text.toLowerCase() : 'jetzt zu'; });
     }
     $$('.days li').forEach((li) => li.classList.toggle('today', li.dataset.wd === WD[v.wd]));
   }
 
-  // ---------- Speisekarte: Tabs ----------
-  const tabs = $$('[role="tab"]');
-  function selectTab(tab, focus) {
-    tabs.forEach((t) => {
-      const on = t === tab;
-      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-    if (focus) tab.focus();
+  // ---------- Ansichten: Haus, Chattanooga, Stadtbräu ----------
+  const TITLES = { haus: 'Chattanooga & Wiener Stadtbräu', chatta: 'Chattanooga, Café & Grill am Graben', braeu: 'Wiener Stadtbräu, Gewölbekeller am Graben' };
+  const HASH = { chatta: '#chattanooga', braeu: '#stadtbraeu', haus: '' };
+  function viewFromHash() {
+    const h = location.hash;
+    if (h === '#chattanooga') return 'chatta';
+    if (h === '#stadtbraeu' || h === '#unten') return 'braeu';
+    if (h === '#haus') return 'haus';
+    return null;
   }
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => selectTab(t));
-    t.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        selectTab(tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length], true);
-      }
-    });
+  function entryView() {
+    const host = location.hostname;
+    if (/stadtbraeu/i.test(host)) return 'braeu';
+    if (/chattanooga/i.test(host)) return 'chatta';
+    return 'haus';
+  }
+  function setView(v, opts = {}) {
+    document.body.dataset.view = v;
+    document.title = TITLES[v];
+    const sel = document.getElementById('dock-entry');
+    if (sel) sel.value = v;
+    if (opts.push) {
+      try { history.pushState({ v }, '', HASH[v] || location.pathname + location.search); } catch { /* Vorschau ohne Verlauf */ }
+    }
+    if (opts.scroll) window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  document.addEventListener('click', (e) => {
+    const go = e.target.closest('[data-go]');
+    if (!go) return;
+    e.preventDefault();
+    setView(go.dataset.go, { push: true, scroll: true });
   });
-  $$('[data-tab]').forEach((a) => a.addEventListener('click', () => selectTab($(`#tab-${a.dataset.tab}`))));
-
-  // ---------- Einstieg je Domain ----------
-  function setEntry(braeu) {
-    document.body.dataset.entry = braeu ? 'braeu' : 'chatta';
-    selectTab($(braeu ? '#tab-braeu' : '#tab-chatta'));
-  }
-  setEntry(/stadtbraeu/i.test(location.hostname) || location.hash === '#unten');
+  window.addEventListener('popstate', () => {
+    const v = viewFromHash();
+    if (v) setView(v); else if (!location.hash) setView(entryView());
+  });
+  setView(viewFromHash() || entryView(), { fromEntry: true });
 
   // ---------- Nummer kopieren ----------
   $$('.copy').forEach((btn) => btn.addEventListener('click', () => {
@@ -276,9 +286,9 @@
     render();
   }));
   $('#dock-season').addEventListener('change', (e) => { sim.season = e.target.checked; render(); });
-  const entryBox = $('#dock-entry');
-  entryBox.checked = document.body.dataset.entry === 'braeu';
-  entryBox.addEventListener('change', () => setEntry(entryBox.checked));
+  const entrySel = $('#dock-entry');
+  entrySel.value = document.body.dataset.view;
+  entrySel.addEventListener('change', () => setView(entrySel.value, { push: true, scroll: true }));
   $('#dock-live').addEventListener('click', () => {
     stopPlay(); sim.minutes = null; sim.wx = null;
     $$('.dock [data-wx]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.wx === 'live')));
