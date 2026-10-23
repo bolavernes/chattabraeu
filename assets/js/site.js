@@ -108,7 +108,7 @@
   const canvas = $('#wx');
   const ctx = canvas.getContext('2d');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let drops = [], kind = 'clear', raf = 0;
+  let drops = [], splashes = [], kind = 'clear', raf = 0;
   function sizeCanvas() {
     const r = canvas.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
@@ -135,6 +135,20 @@
         if (!reduce) { d.y += d.v; d.x -= d.v * 0.18; if (d.y > h) { d.y = -20; d.x = Math.random() * w * 1.1; } }
       }
       ctx.stroke();
+      // Spritzer auf dem nassen Pflaster (untere Bildhälfte, perspektivisch kleiner nach hinten)
+      if (!reduce) {
+        for (let k = 0; k < 4; k++) {
+          const y = h * (0.62 + Math.random() * 0.36);
+          splashes.push({ x: Math.random() * w, y, r: 0, max: 3 + (y / h - 0.6) * 22, life: 1 });
+        }
+      }
+      ctx.lineWidth = 1;
+      splashes = splashes.filter((s) => s.life > 0);
+      for (const s of splashes) {
+        ctx.strokeStyle = `rgba(230,236,245,${(0.5 * s.life).toFixed(2)})`;
+        ctx.beginPath(); ctx.ellipse(s.x, s.y, s.r, s.r * 0.32, 0, 0, Math.PI * 2); ctx.stroke();
+        s.r += s.max / 9; s.life -= 0.11;
+      }
     } else if (kind === 'snow') {
       ctx.fillStyle = 'rgba(255,255,255,.9)';
       for (const d of drops) {
@@ -146,19 +160,40 @@
   }
   function setWeatherFx(k) {
     if (k === kind && drops.length) return;
-    kind = k; cancelAnimationFrame(raf); seed(); frame();
+    kind = k; splashes = []; cancelAnimationFrame(raf); seed(); frame();
   }
   window.addEventListener('resize', sizeCanvas);
 
   // ---------- Darstellung ----------
   const photo = $('#photo');
+  const photos = $$('.ph', photo);
+  let current = photos.find((i) => i.classList.contains('on'));
+  function showPhoto(phase, wxKind) {
+    const look = wxKind === 'rain' || wxKind === 'storm' ? 'rain' : wxKind === 'snow' ? 'snow' : 'clear';
+    const img = photos.find((i) => i.dataset.phase === phase && i.dataset.wx === look);
+    if (!img || img === current) return;
+    const swap = () => {
+      if (img !== want) return;
+      photos.forEach((i) => i.classList.toggle('on', i === img));
+      current = img;
+    };
+    want = img;
+    if (!img.getAttribute('src')) {
+      img.addEventListener('load', swap, { once: true });
+      img.srcset = img.dataset.srcset; img.src = img.dataset.src;
+    } else if (img.complete) swap();
+    else img.addEventListener('load', swap, { once: true });
+  }
+  let want = current;
   function render() {
     const v = vienna();
     const mins = sim.minutes ?? v.mins;
     const wx = sim.wx ? SIM_WX[sim.wx] : liveWx;
     const sun = sunTimes(v);
-    photo.dataset.phase = phaseAt(mins, sun);
+    const phase = phaseAt(mins, sun);
+    photo.dataset.phase = phase;
     photo.dataset.wx = wx ? wx.kind : 'clear';
+    showPhoto(phase, wx ? wx.kind : 'clear');
     setWeatherFx(wx ? wx.kind : 'clear');
 
     const wxText = wx ? ` ${wx.temp} Grad${wx.word ? ', ' + wx.word : ''}.` : '';

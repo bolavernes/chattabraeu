@@ -91,11 +91,8 @@ body[data-entry="braeu"] .head-logos { flex-direction: row-reverse; }
   translate: calc(var(--fx, 50%) * -1) -50%;
 }
 .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease, filter 1s ease; }
-.photo[data-phase="tag"] .ph-tag,
-.photo[data-phase="daemmerung"] .ph-daemmerung,
-.photo[data-phase="nacht"] .ph-nacht { opacity: 1; }
-.photo[data-wx="rain"] .ph, .photo[data-wx="storm"] .ph { filter: brightness(.82) saturate(.8) contrast(1.05); }
-.photo[data-wx="snow"] .ph { filter: brightness(1.04) saturate(.7); }
+.ph.on { opacity: 1; }
+.photo[data-wx="storm"] .ph { filter: brightness(.85) contrast(1.05); }
 .photo[data-wx="cloud"] .ph { filter: saturate(.85) brightness(.95); }
 .wx-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .fog { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 1s; background: rgba(225, 228, 230, .42); }
